@@ -1,0 +1,81 @@
+---
+title: "chapter 01"
+author: "FRANCIS MUTHEE"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyr)
+library(dplyr)
+library(scales)
+library(ggplot2) #graphics
+```
+#library tidyr is used for data reshaping and cleaning.
+#installed.packages()
+
+```{r}
+install.packages("dplyr")
+```
+
+
+#remove.packages
+
+#Reading the dataset
+
+```{r}
+data1 <- read.csv("C:\\Users\\pc\\Desktop\\RR\\highway_mpg.csv")
+print(data1)
+str(data1)
+```
+
+# With library we can reshape the data to:
+```{r}
+data2 <- data1 %>% gather("mpg", "Year of Establishment", -manufacturer)
+print(data2)
+
+```
+# Arranging by year.
+```{r}
+data3 <- data1 %>% arrange(data1$year)
+print(data3)
+```
+
+#Using select to create a new data frame
+
+```{r}
+data4 <- select(data1, manufacturer, model)
+print(data4)
+```
+
+
+```{r}
+data1.grp.year <- group_by(data1, year)
+print(data1.grp.year)
+tally(data1.grp.year)
+summarise(data1.grp.year, +
+mean(displ))
+```
+# n is the number of rows counted.
+
+```{r}
+qplot(data1.grp.year$displ, data1.grp.year$year, xlab = "Displacement", ylab = "year", main = "Manipulating grouped data")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
